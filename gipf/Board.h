@@ -6,18 +6,20 @@
 
 
 #include "Hex.h"
+#include "Resources.cpp"
 
 
 class Board {
 private:
-	int mapSize = 0;
-	int piecesInLineToTriggerCapture = 0;
-	int whitePlayerPiecesQuantity = 0;
-	int blackPlayerPiecesQuantity = 0;
+    int size;
+
+    std::unordered_set<Hex> map;
 
 public:
-    Board();
+    Board(int size);
 
+    void printBoard();
     void drawRectangleRepresentation();
+    void drawHexagonalRepresentation();
 };
 

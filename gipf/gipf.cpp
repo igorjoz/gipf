@@ -1,14 +1,15 @@
 #include <iostream>
 
+
+#include "Game.h"
+
+
 int main()
 {
-	int mapSize = 0;
-	int piecesInLineToTriggerCapture = 0;
-	int whitePlayerPiecesQuantity = 0;
-	int blackPlayerPiecesQuantity = 0;
+	Game game;
 
-	std::cin >> mapSize >> piecesInLineToTriggerCapture;
-	std::cin >> whitePlayerPiecesQuantity >> blackPlayerPiecesQuantity;
+	//game.drawRectangleRepresentation();
+	game.drawHexagonalRepresentation();
 
 	// 2*S-1 -> przek¹tna
 
