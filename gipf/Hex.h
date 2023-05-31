@@ -1,6 +1,9 @@
 #pragma once
 
 
+// Thanks to https://www.redblobgames.com/grids/hexagons/ for the hexagon-related logic
+
+
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -23,11 +26,6 @@ struct Hex {
 	int length() const;
 	int distance(const Hex& other) const;
 
-	const std::vector<Hex> directions = {
-		Hex(1, 0, -1), Hex(1, -1, 0), Hex(0, -1, 1),
-		Hex(-1, 0, 1), Hex(-1, 1, 0), Hex(0, 1, -1)
-	};
-
 	Hex directionHex(int direction) const;
 	Hex neighbor(int direction);
 
@@ -42,3 +40,8 @@ struct Hex {
 	Hex operator*(int factor) const;
 };
 
+
+const std::vector<Hex> directions = {
+		Hex(1, 0, -1), Hex(1, -1, 0), Hex(0, -1, 1),
+		Hex(-1, 0, 1), Hex(-1, 1, 0), Hex(0, 1, -1)
+};
