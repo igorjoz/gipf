@@ -131,12 +131,15 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gipf.cpp" />
     <ClCompile Include="Hex.cpp" />
+    <ClCompile Include="ProgramController.cpp" />
     <ClCompile Include="Resources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hex.h" />
+    <ClInclude Include="ProgramController.h" />
+    <ClInclude Include="Resources.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
