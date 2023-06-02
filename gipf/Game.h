@@ -18,6 +18,8 @@ private:
 	int whitePiecesLeft = 0;
 	int blackPiecesLeft = 0;
 
+	char initialPlayerCharacter = 'W';
+
 	bool isWhitePlayerTurn = true;
 
 public:
@@ -26,6 +28,8 @@ public:
 
 	void readGameSettings();
 
-	void drawHexagonalRepresentation();
+	void checkBoardAfterReading();
+
+	void printBoardInfo();
 };
 

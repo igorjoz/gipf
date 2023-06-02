@@ -1,12 +1,16 @@
 #include <iostream>
 
 
-#include "Game.h"
+#include "ProgramController.h"
 
 
 int main()
 {
-	Game* game = new Game();
+	ProgramController programController = ProgramController();
+
+	programController.run();
+
+	//Game* game = new Game();
 
 	return 0;
 }

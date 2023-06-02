@@ -4,10 +4,10 @@
 Game::Game() : isWhitePlayerTurn{ true } {
 	readGameSettings();
 
-	whitePiecesLeft = whitePiecesQuantity;
-	blackPiecesLeft = blackPiecesQuantity;
-
 	board = new Board(boardSize);
+	board->read();
+	
+	checkBoardAfterReading();
 }
 
 
@@ -17,30 +17,46 @@ Game::~Game() {
 
 
 void Game::readGameSettings() {
-	char startingPlayerCharacter;
-
-	int unknownVariable1 = 0;
-	int unknownVariable2 = 0;
-	
 	std::cin >> boardSize >> piecesInLineToTriggerCapture;
 	
 	std::cin >> whitePiecesQuantity >> blackPiecesQuantity;
 	
-	std::cin >> unknownVariable1 >> unknownVariable2;
+	std::cin >> whitePiecesLeft >> blackPiecesLeft;
 
-	std::cin >> startingPlayerCharacter;
+	std::cin >> initialPlayerCharacter;
 
-	if (startingPlayerCharacter == 'B') {
+	if (initialPlayerCharacter == 'B') {
 		isWhitePlayerTurn = false;
 	}
 }
 
 
-//void Game::drawRectangleRepresentation() {
-//	board->drawRectangleRepresentation();
-//}
+void Game::checkBoardAfterReading() {
+	if (board->getWhitePiecesPlaced() > whitePiecesQuantity - whitePiecesLeft) {
+		std::cout << "WRONG_WHITE_PAWNS_NUMBER\n";
+		board->setIsCorrupted(true);
+	}
+	else if (board->getBlackPiecesPlaced() > blackPiecesQuantity - blackPiecesLeft) {
+		std::cout << "WRONG_BLACK_PAWNS_NUMBER\n";
+		board->setIsCorrupted(true);
+	}
+	else if (!board->getIsCorrupted()) {
+		std::cout << "BOARD_STATE_OK\n";
+	}
+}
 
 
-void Game::drawHexagonalRepresentation() {
-	board->drawHexagonalRepresentation();
+void Game::printBoardInfo() {
+	if (board->getIsCorrupted()) {
+		std::cout << "EMPTY_BOARD\n";
+		return;
+	}
+	
+	std::cout << boardSize << " " << piecesInLineToTriggerCapture << " ";
+	std::cout << whitePiecesQuantity << " " << blackPiecesQuantity << "\n";
+
+	std::cout << whitePiecesLeft << " " << blackPiecesLeft << " ";
+	std::cout << initialPlayerCharacter << " " << "\n";
+
+	board->print();
 }
