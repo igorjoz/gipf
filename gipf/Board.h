@@ -7,7 +7,7 @@
 
 
 #include "Hex.h"
-#include "Resources.cpp"
+#include "Resources.h"
 
 
 class Board {
@@ -16,18 +16,30 @@ private:
     
     int size = 0;
 
+	int totalEmptyPlaces = 0;
+	int whitePiecesPlaced = 0;
+	int blackPiecesPlaced = 0;
+
     int spacesQuantity = 0;
     bool hasPassedMiddleLine = false;
+
+	bool isCorrupted = false;
 
 public:
     Board(int size);
 
-    void printBoard();
-    void readBoard();
-
-    void drawHexagonalRepresentation();
+    void read();
+    void print();
 
     void handleSpacesWhileDrawing();
+
+	int getTotalEmptyPlaces() const;
+	int getWhitePiecesPlaced() const;
+	int getBlackPiecesPlaced() const;
+
+	bool getIsCorrupted() const;
+
+	void setIsCorrupted(bool isCorrupted);
 
     void testBoardPopulation();
 };

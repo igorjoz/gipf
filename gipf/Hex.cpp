@@ -62,6 +62,8 @@ Hex Hex::directionHex(int direction) const {
 	 catch (const std::out_of_range& e) {
 		 std::cerr << "Direction out of range";
 	 }
+
+	 return Hex(0, 0, 0);
 }
 
 
