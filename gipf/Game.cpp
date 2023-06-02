@@ -36,9 +36,9 @@ void Game::readGameSettings() {
 }
 
 
-void Game::drawRectangleRepresentation() {
-	board->drawRectangleRepresentation();
-}
+//void Game::drawRectangleRepresentation() {
+//	board->drawRectangleRepresentation();
+//}
 
 
 void Game::drawHexagonalRepresentation() {

@@ -2,6 +2,7 @@
 
 
 #include <functional>
+#include <algorithm>
 #include <unordered_set>
 
 
@@ -11,15 +12,23 @@
 
 class Board {
 private:
-    int size;
-
     std::unordered_set<Hex> map;
+    
+    int size = 0;
+
+    int spacesQuantity = 0;
+    bool hasPassedMiddleLine = false;
 
 public:
     Board(int size);
 
     void printBoard();
-    void drawRectangleRepresentation();
+    void readBoard();
+
     void drawHexagonalRepresentation();
+
+    void handleSpacesWhileDrawing();
+
+    void testBoardPopulation();
 };
 

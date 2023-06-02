@@ -26,7 +26,6 @@ public:
 
 	void readGameSettings();
 
-	void drawRectangleRepresentation();
 	void drawHexagonalRepresentation();
 };
 
