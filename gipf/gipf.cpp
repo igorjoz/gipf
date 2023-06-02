@@ -6,12 +6,7 @@
 
 int main()
 {
-	Game game;
-
-	//game.drawRectangleRepresentation();
-	game.drawHexagonalRepresentation();
-
-	// 2*S-1 -> przek¹tna
+	Game* game = new Game();
 
 	return 0;
 }

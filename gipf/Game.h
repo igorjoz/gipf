@@ -11,8 +11,14 @@ private:
 	
 	int boardSize = 0;
 	int piecesInLineToTriggerCapture = 0;
-	int whitePlayerPiecesQuantity = 0;
-	int blackPlayerPiecesQuantity = 0;
+	
+	int whitePiecesQuantity = 0;
+	int blackPiecesQuantity = 0;
+	
+	int whitePiecesLeft = 0;
+	int blackPiecesLeft = 0;
+
+	bool isWhitePlayerTurn = true;
 
 public:
 	Game();
