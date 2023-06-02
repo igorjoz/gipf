@@ -1,7 +1,21 @@
 #include "Hex.h"
 
 
-Hex::Hex(int q, int r, int s) : q(q), r(r), s(s) {
+Hex::Hex(int q, int r, int s) :
+	q(q),
+	r(r),
+	s(s) {
+	isOccupied = false;
+	isWhite = false;
+}
+
+
+Hex::Hex(int q, int r, int s, bool isOccupied, bool isWhite) :
+	q(q),
+	r(r),
+	s(s),
+	isOccupied(isOccupied),
+	isWhite(isWhite) {
 }
 
 

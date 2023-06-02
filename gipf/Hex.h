@@ -14,8 +14,11 @@ struct Hex {
     int q;
     int r;
     int s;
+	bool isOccupied;
+	bool isWhite;
     
 	Hex(int q, int r, int s);
+	Hex(int q, int r, int s, bool isOccupied, bool isWhite);
 
 	void add(const Hex& other);
 	void subtract(const Hex& other);
