@@ -67,8 +67,23 @@ Hex Hex::directionHex(int direction) const {
 }
 
 
-Hex Hex::neighbor(int direction) {
-	return addHexes(*this, directionHex(direction));
+Hex Hex::neighbor(int direction) const {
+	return *this + directionHex(direction);
+}
+
+
+char Hex::getColor() const {
+	if (isOccupied) {
+		if (isWhite) {
+			return 'W';
+		}
+		else {
+			return 'B';
+		}
+	}
+	else {
+		return ' ';
+	}
 }
 
 

@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <vector>
 #include <stdexcept>
+#include <tuple>
 
 
 struct Hex {
@@ -30,7 +31,10 @@ struct Hex {
 	int distance(const Hex& other) const;
 
 	Hex directionHex(int direction) const;
-	Hex neighbor(int direction);
+	Hex neighbor(int direction) const;
+
+	// color
+	char getColor() const;
 
 	bool operator==(const Hex& other) const;
 
@@ -41,6 +45,10 @@ struct Hex {
 	Hex operator-(const Hex& other) const;
 
 	Hex operator*(int factor) const;
+
+	bool operator<(const Hex& other) const {
+		return std::tie(q, r, s) < std::tie(other.q, other.r, other.s);
+	}
 };
 
 
