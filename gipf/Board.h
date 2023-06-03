@@ -4,6 +4,7 @@
 #include <functional>
 #include <algorithm>
 #include <unordered_set>
+#include <unordered_map>
 #include <set>
 #include <string>
 
@@ -38,8 +39,7 @@ public:
 
     void handleSpacesWhileDrawing();
 
-	void findChains();
-	void dfs(const Hex& hex, int direction, std::unordered_set<Hex>& visited, std::vector<Hex>& chain);
+	void countChains();
 
 	int getTotalEmptyPlaces() const;
 	int getWhitePiecesPlaced() const;
@@ -52,4 +52,3 @@ public:
 
     void testBoardPopulation();
 };
-

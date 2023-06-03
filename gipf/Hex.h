@@ -17,6 +17,8 @@ struct Hex {
     int s;
 	bool isOccupied;
 	bool isWhite;
+
+	bool counted_in_chain = false;
     
 	Hex(int q, int r, int s);
 	Hex(int q, int r, int s, bool isOccupied, bool isWhite);

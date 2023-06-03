@@ -135,45 +135,6 @@ void Board::handleSpacesWhileDrawing() {
 }
 
 
-//void Board::findChains() {
-//	for (int direction = 0; direction < 6; direction += 2) { // 0, 2, 4 are left to right, top to bottom, top left to bottom right
-//		std::unordered_set<Hex> visited;
-//		// chain set
-//		std::vector<Hex> chain;
-//
-//		// found chains vector
-//		std::vector<std::vector<Hex>> foundChains;
-//
-//		for (const auto& hex : map) {
-//			if (hex.isOccupied) {
-//				visited.clear();
-//				chain.clear();
-//				dfs(hex, direction, visited, chain);
-//				if (chain.size() >= piecesInLineToTriggerCapture) {
-//					// check if chain was not found earlier
-//					if (foundChainsQuantity > 0) {
-//						bool isFound = false;
-//						for (const auto& foundChain : foundChains) {
-//							if (chain == foundChain) {
-//								isFound = true;
-//								break;
-//							}
-//						}
-//						if (isFound) {
-//							continue;
-//						}
-//					}
-//
-//					foundChainsQuantity++;
-//					foundChains.push_back(chain);
-//					//printChain(chain); // Print or otherwise use the found chain
-//				}
-//			}
-//		}
-//	}
-//}
-
-
 std::string hexToString(const Hex& hex) {
 	return std::to_string(hex.q) + ',' + std::to_string(hex.r) + ',' + std::to_string(hex.s);
 }
@@ -193,55 +154,99 @@ std::string chainToString(const std::vector<Hex>& chain) {
 }
 
 
+void Board::countChains() {
+	// go from left to right in every line
+	for (int q = -size; q <= size; q++) {
+		int r1 = std::max(-size, -q - size);
+		int r2 = std::min(size, -q + size);
 
-void Board::findChains() {
-	std::set<std::string> uniqueChains;
-	std::vector<int> desiredDirections = { 1, 5, 0, 4 };
-
-	for (const auto& direction : desiredDirections) {
-		std::unordered_set<Hex> visited;
 		std::vector<Hex> chain;
-		std::vector<Hex> longestChain;
-
-		for (const auto& hex : map) {
-			if (hex.isOccupied) {
-				visited.clear();
-				chain.clear();
-				dfs(hex, direction, visited, chain);
-
-				if (chain.size() > longestChain.size()) {
-					longestChain = chain;
-				}
-
-				if (longestChain.size() >= piecesInLineToTriggerCapture) {
-					std::string chainString = chainToString(longestChain);
-
-					if (uniqueChains.count(chainString) == 0) {
-						uniqueChains.insert(chainString);
-
-						foundChainsQuantity++;
-
-						//printChain(chain);
+		for (int r = r1; r <= r2; r++) {
+			auto hex = map.find(Hex(q, r, -q - r));
+			if (hex != map.end() && hex->isOccupied) {
+				chain.push_back(*hex);
+			}
+			else {
+				if (chain.size() >= piecesInLineToTriggerCapture) {
+					foundChainsQuantity++;
+					for (auto& chain_hex : chain) {
+						chain_hex.counted_in_chain = true;
 					}
 				}
+				chain.clear();
+			}
+		}
+		
+		if (chain.size() >= piecesInLineToTriggerCapture) {
+			foundChainsQuantity++;
+			for (auto& chain_hex : chain) {
+				chain_hex.counted_in_chain = true;
+			}
+		}
+		chain.clear();
+	}
+
+	// go from top left to bottom right in every line
+	for (int r = -size; r <= size; r++) {
+		int q1 = std::max(-size, -r - size);
+		int q2 = std::min(size, -r + size);
+
+		std::vector<Hex> chain;
+		for (int q = q1; q <= q2; q++) {
+			auto hex = map.find(Hex(q, r, -q - r));
+			if (hex != map.end() && hex->isOccupied) {
+				chain.push_back(*hex);
+			}
+			else {
+				if (chain.size() >= piecesInLineToTriggerCapture) {
+					foundChainsQuantity++;
+					for (auto& chain_hex : chain) {
+						chain_hex.counted_in_chain = true;
+					}
+				}
+				chain.clear();
 			}
 		}
 
-		// clear unique chains
-		uniqueChains.clear();
+		if (chain.size() >= piecesInLineToTriggerCapture) {
+			foundChainsQuantity++;
+			for (auto& chain_hex : chain) {
+				chain_hex.counted_in_chain = true;
+			}
+		}
+		chain.clear();
 	}
-}
 
 
-void Board::dfs(const Hex& hex, int direction, std::unordered_set<Hex>& visited, std::vector<Hex>& chain) {
-	visited.insert(hex);
-	chain.push_back(hex);
-	
-	Hex nextHex = hex.neighbor(direction);
-	auto it = map.find(nextHex);
-	
-	if (it != map.end() && visited.count(*it) == 0 && it->isOccupied && it->isWhite == hex.isWhite) {
-		dfs(*it, direction, visited, chain);
+	// go from top right to bottom left in every line
+	for (int s = -size; s <= size; s++) {
+		int r1 = std::max(-size, -s - size);
+		int r2 = std::min(size, -s + size);
+
+		std::vector<Hex> chain;
+		for (int r = r1; r <= r2; r++) {
+			auto hex = map.find(Hex(-s - r, r, s));
+			if (hex != map.end() && hex->isOccupied) {
+				chain.push_back(*hex);
+			}
+			else {
+				if (chain.size() >= piecesInLineToTriggerCapture) {
+					foundChainsQuantity++;
+					for (auto& chain_hex : chain) {
+						chain_hex.counted_in_chain = true;
+					}
+				}
+				chain.clear();
+			}
+		}
+
+		if (chain.size() >= piecesInLineToTriggerCapture) {
+			foundChainsQuantity++;
+			for (auto& chain_hex : chain) {
+				chain_hex.counted_in_chain = true;
+			}
+		}
+		chain.clear();
 	}
 }
 

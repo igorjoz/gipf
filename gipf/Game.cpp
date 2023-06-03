@@ -41,7 +41,8 @@ void Game::checkBoardAfterReading() {
 		board->setIsCorrupted(true);
 	}
 
-	board->findChains();
+	
+	board->countChains();
 	int foundChainsQuantity = board->getFoundChainsQuantity();
 
 	if (foundChainsQuantity == 1) {
@@ -54,7 +55,6 @@ void Game::checkBoardAfterReading() {
 	}
 
 
-	
 	if (!board->getIsCorrupted()) {
 		std::cout << "BOARD_STATE_OK\n";
 	}
