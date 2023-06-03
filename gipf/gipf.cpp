@@ -10,8 +10,6 @@ int main()
 
 	programController.run();
 
-	//Game* game = new Game();
-
 	return 0;
 }
 
