@@ -4,7 +4,7 @@
 Game::Game() : isWhitePlayerTurn{ true } {
 	readGameSettings();
 
-	board = new Board(boardSize);
+	board = new Board(boardSize, piecesInLineToTriggerCapture);
 	board->read();
 	
 	checkBoardAfterReading();
@@ -40,7 +40,22 @@ void Game::checkBoardAfterReading() {
 		std::cout << "WRONG_BLACK_PAWNS_NUMBER\n";
 		board->setIsCorrupted(true);
 	}
-	else if (!board->getIsCorrupted()) {
+
+	board->findChains();
+	int foundChainsQuantity = board->getFoundChainsQuantity();
+
+	if (foundChainsQuantity == 1) {
+		std::cout << "ERROR_FOUND_" << foundChainsQuantity << "_ROW_OF_LENGTH_K\n";
+		board->setIsCorrupted(true);
+	}
+	else if (foundChainsQuantity > 1) {
+		std::cout << "ERROR_FOUND_" << foundChainsQuantity << "_ROWS_OF_LENGTH_K\n";
+		board->setIsCorrupted(true);
+	}
+
+
+	
+	if (!board->getIsCorrupted()) {
 		std::cout << "BOARD_STATE_OK\n";
 	}
 }
