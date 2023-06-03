@@ -132,7 +132,6 @@
     <ClCompile Include="gipf.cpp" />
     <ClCompile Include="Hex.cpp" />
     <ClCompile Include="ProgramController.cpp" />
-    <ClCompile Include="Resources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
