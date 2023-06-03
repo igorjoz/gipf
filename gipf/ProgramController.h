@@ -21,8 +21,8 @@ public:
 	~ProgramController();
 
 	void run();
-
-	bool readCommand();
 	void readAndExecuteCommand();
+
+	void parseDoMoveCommand();
 };
 
