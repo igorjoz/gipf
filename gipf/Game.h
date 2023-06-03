@@ -30,6 +30,8 @@ public:
 
 	void checkBoardAfterReading();
 
+	std::tuple<int, int, int> convertAlphaNumToHex(const std::string& alphaNumCoord);
+
 	void printBoardInfo();
 };
 

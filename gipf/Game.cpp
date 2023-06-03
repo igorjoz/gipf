@@ -75,3 +75,34 @@ void Game::printBoardInfo() {
 
 	board->print();
 }
+
+
+std::tuple<int, int, int> Game::convertAlphaNumToHex(const std::string& alphaNumCoord) {
+	boardSize++;
+
+	char letter = alphaNumCoord[0];
+	int number = alphaNumCoord[1] - '0';
+	
+	// example for size == 5:
+	std::unordered_map<char, int> letterToQ = { {'a', -2}, {'b', -1}, {'c', 0}, {'d', 1}, {'e', 2} };
+	/*std::unordered_map<char, int> letterToQ;
+	for (int i = 0; i < boardSize; i++) {
+		letterToQ.insert({ 'a' + i, (int)(-boardSize/2) + 1 + i });
+	}*/
+
+	
+	// example for size == 5:
+	std::unordered_map<int, int> numberToS = { {1, 2}, {2, 1}, {3, 0}, {4, -1}, {5, -2} };
+	/*std::unordered_map<int, int> numberToS;
+	for (int i = 0; i < boardSize; i++) {
+		numberToS.insert({ i + 1, (int)(boardSize/2) - i });
+	}*/
+
+	int q = letterToQ[letter];
+	int s = numberToS[number];
+	int r = -q - s;
+
+	boardSize--;
+
+	return std::make_tuple(q, r, s);
+}
