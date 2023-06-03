@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <set>
 #include <string>
+#include <tuple>
 
 
 #include "Hex.h"
@@ -35,6 +36,7 @@ public:
 
     void read();
     void print();
+	void printWithIndices();
 	void printChain(const std::vector<Hex>& chain);
 
     void handleSpacesWhileDrawing();

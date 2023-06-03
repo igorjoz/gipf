@@ -71,6 +71,8 @@ void Board::read() {
 	}
 
 	size++;
+
+	printWithIndices();
 }
 
 
@@ -103,6 +105,40 @@ void Board::print() {
 		}
 
 		std::cout << "\n";
+	}
+}
+
+
+void Board::printWithIndices() {
+	for (int q = -size; q <= size; q++) {
+		int r1 = std::max(-size, -q - size);
+		int r2 = std::min(size, -q + size);
+
+		handleSpacesWhileDrawing();
+
+		for (int r = r1; r <= r2; r++) {
+			auto hex = map.find(Hex(q, r, -q - r));
+
+			if (hex != map.end()) {
+				/*if (!hex->isOccupied) {
+					std::cout << "_";
+				}
+				else if (hex->isWhite) {
+					std::cout << "W";
+				}
+				else {
+					std::cout << "B";
+				}*/
+				std::cerr << "(" << hex->q << "," << hex->r << "," << hex->s << ")";
+
+				std::cerr << " ";
+			}
+			else if (r != r1) {
+				std::cerr << "  ";
+			}
+		}
+
+		std::cerr << "\n";
 	}
 }
 
@@ -169,8 +205,8 @@ void Board::countChains() {
 			else {
 				if (chain.size() >= piecesInLineToTriggerCapture) {
 					foundChainsQuantity++;
-					for (auto& chain_hex : chain) {
-						chain_hex.counted_in_chain = true;
+					for (auto& chainHex : chain) {
+						chainHex.countedInChain = true;
 					}
 				}
 				chain.clear();
@@ -179,8 +215,8 @@ void Board::countChains() {
 		
 		if (chain.size() >= piecesInLineToTriggerCapture) {
 			foundChainsQuantity++;
-			for (auto& chain_hex : chain) {
-				chain_hex.counted_in_chain = true;
+			for (auto& chainHex : chain) {
+				chainHex.countedInChain = true;
 			}
 		}
 		chain.clear();
@@ -200,8 +236,8 @@ void Board::countChains() {
 			else {
 				if (chain.size() >= piecesInLineToTriggerCapture) {
 					foundChainsQuantity++;
-					for (auto& chain_hex : chain) {
-						chain_hex.counted_in_chain = true;
+					for (auto& chainHex : chain) {
+						chainHex.countedInChain = true;
 					}
 				}
 				chain.clear();
@@ -210,8 +246,8 @@ void Board::countChains() {
 
 		if (chain.size() >= piecesInLineToTriggerCapture) {
 			foundChainsQuantity++;
-			for (auto& chain_hex : chain) {
-				chain_hex.counted_in_chain = true;
+			for (auto& chainHex : chain) {
+				chainHex.countedInChain = true;
 			}
 		}
 		chain.clear();
@@ -232,8 +268,8 @@ void Board::countChains() {
 			else {
 				if (chain.size() >= piecesInLineToTriggerCapture) {
 					foundChainsQuantity++;
-					for (auto& chain_hex : chain) {
-						chain_hex.counted_in_chain = true;
+					for (auto& chainHex : chain) {
+						chainHex.countedInChain = true;
 					}
 				}
 				chain.clear();
@@ -242,8 +278,8 @@ void Board::countChains() {
 
 		if (chain.size() >= piecesInLineToTriggerCapture) {
 			foundChainsQuantity++;
-			for (auto& chain_hex : chain) {
-				chain_hex.counted_in_chain = true;
+			for (auto& chainHex : chain) {
+				chainHex.countedInChain = true;
 			}
 		}
 		chain.clear();

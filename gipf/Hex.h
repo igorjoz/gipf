@@ -18,7 +18,7 @@ struct Hex {
 	bool isOccupied;
 	bool isWhite;
 
-	bool counted_in_chain = false;
+	bool countedInChain = false;
     
 	Hex(int q, int r, int s);
 	Hex(int q, int r, int s, bool isOccupied, bool isWhite);
@@ -35,7 +35,6 @@ struct Hex {
 	Hex directionHex(int direction) const;
 	Hex neighbor(int direction) const;
 
-	// color
 	char getColor() const;
 
 	bool operator==(const Hex& other) const;
